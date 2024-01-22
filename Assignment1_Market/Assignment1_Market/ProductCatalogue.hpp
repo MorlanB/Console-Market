@@ -21,7 +21,6 @@ class ProductCatalogue
 private:
     std::vector<Product> products;
 public:
-    // Constructor to initialize products vector
     ProductCatalogue()
         : products({
               Product(1, "Spicy Pepper", 10.0f),

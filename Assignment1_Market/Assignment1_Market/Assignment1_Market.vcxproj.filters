@@ -27,6 +27,9 @@
     <ClCompile Include="ProductCatalogue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AppUtilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Customer.hpp">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ProductCatalogue.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AppUtilities.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,12 +1,16 @@
 #include <iostream>
 #include "BasketManager.hpp"
 #include "Customer.hpp"
+#include "AppUtilities.hpp"
 
 int main()
 {
 	BasketManager basketManager = BasketManager();
-	Customer customer = Customer(1, "John", 12345678910, "Doe");
+	Customer customer = Customer();
+	basketManager.CreateBasket(customer);
 
+	Utilities utilities = Utilities();
+	utilities.EnterStartMenu();
 
 
 	return 0;

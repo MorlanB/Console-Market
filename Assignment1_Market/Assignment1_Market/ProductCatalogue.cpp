@@ -5,14 +5,14 @@
 
 bool ProductCatalogue::RemoveProduct(int productId)
 {
-	//   for (int i = 0; i < products.size(); i++)
-	//   {
-	//       if (products[i].id == productId)
-	//       {
-	   //		products.erase(products.begin() + i);
-	   //		return true;
-	   //	}
-	   //}
+	for (int i = 0; i < products.size(); i++)
+	{
+		if (products[i].id == productId)
+		{
+			products.erase(products.begin() + i);
+			return true;
+		}
+	}
 	return false;
 }
 
