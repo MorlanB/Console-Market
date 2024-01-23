@@ -9,7 +9,7 @@ int main()
 	Customer customer = Customer();
 	basketManager.CreateBasket(customer);
 
-	Utilities utilities = Utilities();
+	Utilities utilities = Utilities(basketManager);
 	utilities.EnterStartMenu();
 
 

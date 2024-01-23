@@ -3,24 +3,30 @@
 #include <iostream>
 #include <stdlib.h> 
 
-Utilities::Utilities()
+Utilities::Utilities(BasketManager basketManager)
 {
+	this->basketManager = basketManager;
+
 	startMenuOptions[0] = { 'A', "Admin Menu" };
 	startMenuOptions[1] = { 'S', "Shop" };
 	startMenuOptions[2] = { 'R', "Enter Reward Account" };
 
 	adminMenuOptions[0] = { 'P', "Manage Product Catalogue" };
 	adminMenuOptions[1] = { 'C', "Manage Registered Customers" };
+	adminMenuOptions[2] = { 'B', "Back to Start screen" };
 
-	productMenuOptions[0] = { 'E', "Proceed to Checkout" };
+	productMenuOptions[0] = { 'C', "Proceed to Checkout" };
+	productMenuOptions[1] = { 'B', "Go back to Start Menu" };
 
 	checkoutMenuOptions[0] = { 'P', "Pay" };
+	checkoutMenuOptions[1] = { 'B', "Go Back to Shop" };
 }
 
 void Utilities::EnterStartMenu()
 {
+	SetActiveMenu(startMenu);
 	std::cout << startAsciiString << std::endl << std::endl;
-	DisplayMenuOptions(startMenuOptions, 3);
+	DisplayMenuOptions(activeMenu);
 
 	char input = WaitForCharInput();
 	switch (input)
@@ -29,19 +35,23 @@ void Utilities::EnterStartMenu()
 			EnterAdminMenu();
 			break;
 		case 'S':
-			system("CLS");
-			DisplayMenuOptions(productMenuOptions, 1);
+			EnterShopMenu();
 			break;
 		case 'R':
 
+			break;
+		default:
+			EnterStartMenu();
 			break;
 	}
 }
 
 void Utilities::EnterAdminMenu()
 {
-	system("CLS");
-	DisplayMenuOptions(adminMenuOptions, 2);
+	SetActiveMenu(adminMenu);
+	std::cout << "Admin Menu" << std::endl << std::endl;
+	DisplayMenuOptions(activeMenu);
+
 	char input = WaitForCharInput();
 	switch (input)
 	{
@@ -49,15 +59,96 @@ void Utilities::EnterAdminMenu()
 			break;
 		case 'C':
 			break;
+		case 'B':
+			EnterStartMenu();
+			break;
+		default:
+			EnterAdminMenu();
+			break;
 	}
 }
 
-void Utilities::DisplayMenuOptions(MenuOption menuOptions[], int options = 1)
+void Utilities::EnterShopMenu()
+{
+	SetActiveMenu(productMenu);
+
+	std::cout << std::endl << "   ---   Make your Selection   ---   " << std::endl << std::endl;
+	DisplayCatalogue(basketManager.GetBasket(1));
+
+	DisplayMenuOptions(activeMenu);
+
+	char input = WaitForCharInput();
+	switch (input)
+	{
+		case 'C':
+			EnterCheckoutMenu();
+			break;
+		case 'B':
+			EnterStartMenu();
+			break;
+		default:
+			EnterShopMenu();
+			break;
+	}
+}
+
+void Utilities::EnterCheckoutMenu()
+{
+	SetActiveMenu(checkoutMenu);
+	DisplayMenuOptions(activeMenu);
+
+	char input = WaitForCharInput();
+	switch (input)
+	{
+		case 'P':
+			break;
+		case 'B':
+			EnterShopMenu();
+			break;
+		default:
+			EnterCheckoutMenu();
+			break;
+	}
+}
+
+void Utilities::DisplayMenuOptions(menuType activeMenu)
+{
+	switch (activeMenu)
+	{
+		case startMenu:
+			DisplayMenuOptions(startMenuOptions, 3);
+			break;
+		case adminMenu:
+			DisplayMenuOptions(adminMenuOptions, 3);
+			break;
+		case productMenu:
+			DisplayMenuOptions(productMenuOptions, 2);
+			break;
+		case checkoutMenu:
+			DisplayMenuOptions(checkoutMenuOptions, 2);
+			break;
+	}
+}
+
+void Utilities::DisplayMenuOptions(MenuOption menuOptions[], int options)
 {
 	for (int i = 0; i < options; i++)
 	{
 		std::cout << menuOptions[i].key << " - " << menuOptions[i].description << std::endl;
 	}
+}
+
+void Utilities::DisplayCatalogue(Basket basket)
+{
+	std::cout << "Product Catalogue" << std::endl << std::endl;
+	std::cout << "ID" << "\t" << "Name" << "\t\t\t" << "Price" << std::endl;
+	std::cout << "--------------------------------------------------" << std::endl;
+	for (int i = 0; i < productCatalogue.GetProducts().size(); i++)
+	{
+		std::cout << productCatalogue.GetProducts()[i].id << "\t" << productCatalogue.GetProducts()[i].name << "\t\t" << productCatalogue.GetProducts()[i].price  << "\t\t" << basket.GetProductSelections()[i].quantity << std::endl;
+	}
+
+	std::cout << std::endl << std::endl;
 }
 
 char Utilities::WaitForCharInput()
@@ -70,4 +161,10 @@ char Utilities::WaitForCharInput()
 		input -= 32;
 
 	return input;
+}
+
+void Utilities::SetActiveMenu(menuType menu)
+{
+	activeMenu = menu;
+	system("CLS");
 }

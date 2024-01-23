@@ -29,6 +29,7 @@ public:
     void DisplayProducts();
     bool AssignCustomer(Customer customer);
     void AddProduct(int productId, int quantity);
+    std::vector<ProductSelection> GetProductSelections();
 };
 
 class BasketManager
@@ -40,6 +41,7 @@ private:
 public:
     BasketManager();
     void CreateBasket(Customer customer);
+    Basket GetBasket(int basketId);
 };
 
 #endif

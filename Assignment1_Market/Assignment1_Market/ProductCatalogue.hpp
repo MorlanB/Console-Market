@@ -27,7 +27,7 @@ public:
               Product(2, "Sunshroom", 5.0f),
               Product(3, "Hydromelon", 12.0f),
               Product(4, "Voltfruit", 7.0f),
-              Product(5, "Electric Safflina", 10.0f),
+              Product(5, "Safflina", 10.0f),
               Product(6, "Swift Carrot", 3.0f),
               Product(7, "Endura Carrot", 4.0f)
             }) {
