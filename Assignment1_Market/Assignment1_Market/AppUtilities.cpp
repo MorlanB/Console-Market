@@ -1,7 +1,7 @@
 #include "AppUtilities.hpp"
 
 #include <iostream>
-#include <stdlib.h> 
+#include <stdlib.h>
 
 Utilities::Utilities(BasketManager basketManager)
 {
@@ -17,6 +17,7 @@ Utilities::Utilities(BasketManager basketManager)
 
 	productMenuOptions[0] = { 'C', "Proceed to Checkout" };
 	productMenuOptions[1] = { 'B', "Go back to Start Menu" };
+	productMenuOptions[2] = { 'A', "Add Product to Basket" };
 
 	checkoutMenuOptions[0] = { 'P', "Pay" };
 	checkoutMenuOptions[1] = { 'B', "Go Back to Shop" };
@@ -72,8 +73,8 @@ void Utilities::EnterShopMenu()
 {
 	SetActiveMenu(productMenu);
 
-	std::cout << std::endl << "   ---   Make your Selection   ---   " << std::endl << std::endl;
-	DisplayCatalogue(basketManager.GetBasket(1));
+	std::cout << std::endl << "\t\t---   Make your Selection   ---   " << std::endl << std::endl;
+	basketManager.GetBasket(0).DisplayProducts();
 
 	DisplayMenuOptions(activeMenu);
 
@@ -86,6 +87,17 @@ void Utilities::EnterShopMenu()
 		case 'B':
 			EnterStartMenu();
 			break;
+		case 'A':
+			int id;
+			int quantity;
+			std::cout << "Enter Product ID: ";
+			std::cin >> id;
+			std::cout << "Enter Quantity:";
+			std::cin >> quantity;
+			basketManager.GetBasket(0).AddProduct(id, quantity);
+			//EnterShopMenu();
+			break;
+
 		default:
 			EnterShopMenu();
 			break;
@@ -122,7 +134,7 @@ void Utilities::DisplayMenuOptions(menuType activeMenu)
 			DisplayMenuOptions(adminMenuOptions, 3);
 			break;
 		case productMenu:
-			DisplayMenuOptions(productMenuOptions, 2);
+			DisplayMenuOptions(productMenuOptions, 3);
 			break;
 		case checkoutMenu:
 			DisplayMenuOptions(checkoutMenuOptions, 2);
@@ -145,7 +157,7 @@ void Utilities::DisplayCatalogue(Basket basket)
 	std::cout << "--------------------------------------------------" << std::endl;
 	for (int i = 0; i < productCatalogue.GetProducts().size(); i++)
 	{
-		std::cout << productCatalogue.GetProducts()[i].id << "\t" << productCatalogue.GetProducts()[i].name << "\t\t" << productCatalogue.GetProducts()[i].price  << "\t\t" << basket.GetProductSelections()[i].quantity << std::endl;
+		std::cout << productCatalogue.GetProducts()[i].id << "\t" << productCatalogue.GetProducts()[i].name << "\t\t" << productCatalogue.GetProducts()[i].price << std::endl;
 	}
 
 	std::cout << std::endl << std::endl;

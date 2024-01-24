@@ -29,7 +29,7 @@ class Utilities
 
 		MenuOption startMenuOptions[3];
 		MenuOption adminMenuOptions[3];
-		MenuOption productMenuOptions[2];
+		MenuOption productMenuOptions[3];
 		MenuOption checkoutMenuOptions[2];
 
 		std::string startAsciiString =

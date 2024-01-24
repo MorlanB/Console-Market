@@ -12,6 +12,5 @@ int main()
 	Utilities utilities = Utilities(basketManager);
 	utilities.EnterStartMenu();
 
-
 	return 0;
 }

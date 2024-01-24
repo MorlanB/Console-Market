@@ -27,6 +27,7 @@ public:
 
     std::vector<ProductSelection> GenerateProductSelections(std::vector<Product> products);
     void DisplayProducts();
+    double GetTotal();
     bool AssignCustomer(Customer customer);
     void AddProduct(int productId, int quantity);
     std::vector<ProductSelection> GetProductSelections();

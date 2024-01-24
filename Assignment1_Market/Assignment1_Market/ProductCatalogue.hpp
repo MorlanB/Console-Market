@@ -36,6 +36,7 @@ public:
     void AddProduct(Product product);
     bool RemoveProduct(int productId);
     std::vector<Product> GetProducts();
+Product GetProduct(int productId);
 };
 
 #endif

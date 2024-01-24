@@ -21,6 +21,18 @@ std::vector<Product> ProductCatalogue::GetProducts()
 	return products;
 }
 
+Product ProductCatalogue::GetProduct(int productId)
+{
+for (int i = 0; i < products.size(); i++)
+	{
+		if (products[i].id == productId)
+		{
+			return products[i];
+		}
+	}
+	return Product(-1, "", -1);
+}
+
 void ProductCatalogue::AddProduct(Product product)
 {
 	products.push_back(product);
