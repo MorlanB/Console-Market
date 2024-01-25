@@ -23,11 +23,13 @@ Utilities::Utilities(BasketManager basketManager)
 	checkoutMenuOptions[1] = { 'B', "Go Back to Shop" };
 }
 
+#pragma region MenuStates
+
 void Utilities::EnterStartMenu()
 {
 	SetActiveMenu(startMenu);
 	std::cout << startAsciiString << std::endl << std::endl;
-	DisplayMenuOptions(activeMenu);
+	DisplayMenuOptions();
 
 	char input = WaitForCharInput();
 	switch (input)
@@ -51,7 +53,7 @@ void Utilities::EnterAdminMenu()
 {
 	SetActiveMenu(adminMenu);
 	std::cout << "Admin Menu" << std::endl << std::endl;
-	DisplayMenuOptions(activeMenu);
+	DisplayMenuOptions();
 
 	char input = WaitForCharInput();
 	switch (input)
@@ -77,7 +79,7 @@ void Utilities::EnterShopMenu()
 	Basket& basket = basketManager.GetBasket(0);
 	basket.DisplayProducts();
 
-	DisplayMenuOptions(activeMenu);
+	DisplayMenuOptions();
 
 	char input = WaitForCharInput();
 	switch (input)
@@ -108,7 +110,7 @@ void Utilities::EnterShopMenu()
 void Utilities::EnterCheckoutMenu()
 {
 	SetActiveMenu(checkoutMenu);
-	DisplayMenuOptions(activeMenu);
+	DisplayMenuOptions();
 
 	char input = WaitForCharInput();
 	switch (input)
@@ -124,7 +126,28 @@ void Utilities::EnterCheckoutMenu()
 	}
 }
 
-void Utilities::DisplayMenuOptions(menuType activeMenu)
+void Utilities::EnterCatalogueMenuAdmin()
+{
+	SetActiveMenu(catalogueMenuAdmin);
+	DisplayMenuOptions();
+
+	char input = WaitForCharInput();
+	switch (input)
+	{
+		case 'A':
+			break;
+		case 'B':
+			EnterAdminMenu();
+			break;
+		default:
+			EnterCatalogueMenuAdmin();
+			break;
+	}
+}
+
+#pragma endregion
+
+void Utilities::DisplayMenuOptions()
 {
 	switch (activeMenu)
 	{
@@ -147,7 +170,7 @@ void Utilities::DisplayMenuOptions(MenuOption menuOptions[], int options)
 {
 	for (int i = 0; i < options; i++)
 	{
-		std::cout << menuOptions[i].key << " - " << menuOptions[i].description << std::endl;
+		std::cout << "  " << menuOptions[i].key << " - " << menuOptions[i].description << std::endl;
 	}
 }
 

@@ -55,6 +55,7 @@ class Utilities
 		void EnterAdminMenu();
 		void EnterShopMenu();
 		void EnterCheckoutMenu();
+		void EnterCatalogueMenuAdmin();
 
 	public:
 		Utilities(BasketManager basketManager);
@@ -65,7 +66,7 @@ class Utilities
 		void EnterStartMenu();
 
 		//Display
-		void DisplayMenuOptions(menuType activeMenu);
+		void DisplayMenuOptions();
 		void DisplayCatalogue(Basket basket);
 
 		//Input Handling
