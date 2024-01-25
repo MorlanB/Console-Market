@@ -19,9 +19,12 @@ void BasketManager::CreateBasket(Customer customer)
     baskets.push_back(basket);
 }
 
-Basket BasketManager::GetBasket(int basketId)
+Basket& BasketManager::GetBasket(int basketId)
 {
-    return baskets[basketId];
+    if (basketId >= 0 && basketId < baskets.size())
+    {
+        return baskets[basketId];
+    }
 }
 
 Basket::Basket(int id, Customer customer, std::vector<Product> products)
@@ -86,8 +89,6 @@ void  Basket::AddProduct(int productId, int quantity)
             productSelections[i].quantity += quantity;
         }
     }
-
-    std::cout << "Product added to basket" << productId << " x " << quantity << std::endl;
 }
 
 std::vector<ProductSelection> Basket::GetProductSelections()

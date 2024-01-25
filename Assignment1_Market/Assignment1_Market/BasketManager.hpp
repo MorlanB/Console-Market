@@ -42,7 +42,7 @@ private:
 public:
     BasketManager();
     void CreateBasket(Customer customer);
-    Basket GetBasket(int basketId);
+    Basket& GetBasket(int basketId);
 };
 
 #endif

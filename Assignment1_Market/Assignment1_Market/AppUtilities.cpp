@@ -74,7 +74,8 @@ void Utilities::EnterShopMenu()
 	SetActiveMenu(productMenu);
 
 	std::cout << std::endl << "\t\t---   Make your Selection   ---   " << std::endl << std::endl;
-	basketManager.GetBasket(0).DisplayProducts();
+	Basket& basket = basketManager.GetBasket(0);
+	basket.DisplayProducts();
 
 	DisplayMenuOptions(activeMenu);
 
@@ -94,8 +95,8 @@ void Utilities::EnterShopMenu()
 			std::cin >> id;
 			std::cout << "Enter Quantity:";
 			std::cin >> quantity;
-			basketManager.GetBasket(0).AddProduct(id, quantity);
-			//EnterShopMenu();
+			basket.AddProduct(id, quantity);
+			EnterShopMenu();
 			break;
 
 		default:
