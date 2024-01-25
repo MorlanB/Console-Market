@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <stdlib.h>
+#include <string>
 
 Utilities::Utilities(BasketManager basketManager)
 {
@@ -100,9 +101,9 @@ void Utilities::EnterShopMenu()
 			int id;
 			int quantity;
 			std::cout << "Enter Product ID: ";
-			std::cin >> id;
+			id = WaitForIntInput();
 			std::cout << "Enter Quantity:";
-			std::cin >> quantity;
+			quantity = WaitForIntInput();
 			basket.AddProduct(id, quantity);
 			EnterShopMenu();
 			break;
@@ -134,8 +135,9 @@ void Utilities::EnterCheckoutMenu()
 
 void Utilities::EnterCatalogueMenuAdmin()
 {
-	std::string productName = "";
+	std::string productName;
 	int id = 0;
+	float price = 0;
 	SetActiveMenu(catalogueMenuAdmin);
 	productCatalogue.DisplayProducts();
 	DisplayMenuOptions();
@@ -144,11 +146,10 @@ void Utilities::EnterCatalogueMenuAdmin()
 	switch (input)
 	{
 		case 'A':
-			float price;
 			std::cout << "Enter Product Name: ";
-			std::cin >> productName;
+			productName = WaitForStringInput();
 			std::cout << "Enter Product Price: ";
-			std::cin >> price;
+			price = WaitForFloatInput();
 			id = productCatalogue.GetProducts().size() + 1;
 			productCatalogue.AddProduct(Product(productCatalogue.GenerateProductId(), productName, price));
 			EnterCatalogueMenuAdmin();
@@ -163,9 +164,9 @@ void Utilities::EnterCatalogueMenuAdmin()
 			std::cout << "Enter Product ID: ";
 			id = WaitForIntInput();
 			std::cout << "Enter Product Name: ";
-			std::cin >> productName;
+			productName = WaitForStringInput();
 			std::cout << "Enter Product Price: ";
-			std::cin >> price;
+			price = WaitForFloatInput();
 			productCatalogue.RemoveProduct(id);
 			productCatalogue.AddProduct(Product(id, productName, price));
 			EnterCatalogueMenuAdmin();
@@ -249,6 +250,29 @@ int Utilities::WaitForIntInput()
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		std::cout << "Invalid input, please try again" << std::endl;
 		WaitForIntInput();
+	}
+	return input;
+}
+
+std::string Utilities::WaitForStringInput()
+{
+	std::string input;
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	std::getline(std::cin, input);
+	return input;
+}
+
+float Utilities::WaitForFloatInput()
+{
+	float input;
+	if (std::cin >> input)
+		return input;
+	else
+	{
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cout << "Invalid input, please try again" << std::endl;
+		WaitForFloatInput();
 	}
 	return input;
 }

@@ -51,8 +51,6 @@ class Utilities
 		void DisplayMenuOptions(MenuOption menuOptions[], int options);
 
 		//Menus
-		void SetMenu(menuType menu);
-
 		void EnterAdminMenu();
 		void EnterShopMenu();
 		void EnterCheckoutMenu();
@@ -61,20 +59,19 @@ class Utilities
 	public:
 		Utilities(BasketManager basketManager);
 
-		Utilities();
-
 		//Menus
 		void EnterStartMenu();
-
+		void SetActiveMenu(menuType menu);
 
 		//Display
 		void DisplayMenuOptions();
 		void DisplayCatalogue(Basket basket);
 
 		//Input Handling
-		char WaitForCharInput();
 		int WaitForIntInput();
-		void SetActiveMenu(menuType menu);
+		float WaitForFloatInput();
+		char WaitForCharInput();
+		std::string WaitForStringInput();
 };
 
 #endif
