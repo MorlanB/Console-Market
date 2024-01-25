@@ -28,21 +28,22 @@ void Customer::SetId(int id)
 
 std::string Customer::GetName()
 {
-	return std::string();
+	return name;
 }
 
 int Customer::GetPhoneNumber()
 {
-	return 0;
+	return phoneNumber;
 }
 
 std::string Customer::GetEmail()
 {
-	return std::string();
+	return email;
 }
 
 void CustomerCatalogue::AddCustomer(Customer customer)
 {
+	customers.push_back(customer);
 }
 
 bool CustomerCatalogue::RemoveCustomer(int customerId)
@@ -72,7 +73,7 @@ Customer CustomerCatalogue::GetCustomer(int customerId)
 void CustomerCatalogue::DisplayCustomers()
 {
 	std::cout << "Customer Catalogue" << std::endl << std::endl;
-	std::cout << " ID" << "\t" << "Name" << "\t\t\t" << "Phone Number" << "\t" << "Email" << std::endl;
+	std::cout << " ID" << "\t" << "Name" << "\t\t" << "Phone Number" << "\t" << "Email" << std::endl;
 	std::cout << "--------------------------------------------------" << std::endl;
 	for (int i = 0; i < customers.size(); i++)
 	{

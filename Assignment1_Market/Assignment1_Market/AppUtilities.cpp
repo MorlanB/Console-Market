@@ -10,7 +10,7 @@ Utilities::Utilities(BasketManager basketManager)
 
 	startMenuOptions[0] = { 'A', "Admin Menu" };
 	startMenuOptions[1] = { 'S', "Shop" };
-	startMenuOptions[2] = { 'R', "Enter Reward Account" };
+	startMenuOptions[2] = { 'R', "Enter Reward Card" };
 
 	adminMenuOptions[0] = { 'P', "Manage Product Catalogue" };
 	adminMenuOptions[1] = { 'C', "Manage Registered Customers" };
@@ -122,13 +122,19 @@ void Utilities::EnterShopMenu()
 
 void Utilities::EnterCheckoutMenu()
 {
+	float cash = 0;
+
 	SetActiveMenu(checkoutMenu);
+	std::cout << "Checkout" << std::endl << std::endl;
+	std::cout << "Total: " << basketManager.GetBasket(0).GetTotal() << std::endl << std::endl;
+
 	DisplayMenuOptions();
 
 	char input = WaitForCharInput();
 	switch (input)
-	{
+		{
 		case 'P':
+			TryMakePayment();
 			break;
 		case 'B':
 			EnterShopMenu();
@@ -138,6 +144,30 @@ void Utilities::EnterCheckoutMenu()
 			break;
 	}
 }
+
+void Utilities::TryMakePayment()
+{
+	float cash = 0;
+	char input;
+
+	std::cout << "Please enter amount in cash: ";
+	cash = WaitForFloatInput();
+	if (cash < basketManager.GetBasket(0).GetTotal())
+	{
+		std::cout << "Not enough cash, please try again" << std::endl;
+		TryMakePayment();
+	}
+	else
+	{
+		std::cout << std::endl << "Change: " << cash - basketManager.GetBasket(0).GetTotal() << std::endl;
+		std::cout << "Thank you for shopping at ... MARKET" << std::endl;
+		std::cout << "Please come again" << std::endl;
+		std::cout << "Press any key to continue" << std::endl;
+		std::cin >> input;
+		EnterStartMenu();
+	}
+}
+
 
 void Utilities::EnterCatalogueMenuAdmin()
 {
@@ -241,6 +271,8 @@ void Utilities::EnterCustomerMenuAdmin()
 
 #pragma endregion
 
+#pragma region Output
+
 void Utilities::DisplayMenuOptions()
 {
 	switch (activeMenu)
@@ -288,6 +320,10 @@ void Utilities::DisplayCatalogue(Basket basket)
 
 	std::cout << std::endl << std::endl;
 }
+
+#pragma endregion
+
+#pragma region Input Handling
 
 char Utilities::WaitForCharInput()
 {
@@ -344,3 +380,5 @@ void Utilities::SetActiveMenu(menuType menu)
 	activeMenu = menu;
 	system("CLS");
 }
+
+#pragma endregion

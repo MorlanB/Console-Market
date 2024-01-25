@@ -77,6 +77,8 @@ class Utilities
 		float WaitForFloatInput();
 		char WaitForCharInput();
 		std::string WaitForStringInput();
+
+		void TryMakePayment();
 };
 
 #endif
