@@ -24,10 +24,10 @@ std::vector<Product> ProductCatalogue::GetProducts()
 int ProductCatalogue::GenerateProductId()
 {
 	int newId = products.size() + 1;
-	if (GetProduct(newId).id == -1)
-		return newId;
-	else
-		return GenerateProductId();
+	while (GetProduct(newId).id > -1)
+		newId++;
+
+	return newId;
 }
 
 Product ProductCatalogue::GetProduct(int productId)

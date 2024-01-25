@@ -66,12 +66,14 @@ class Utilities
 		//Menus
 		void EnterStartMenu();
 
+
 		//Display
 		void DisplayMenuOptions();
 		void DisplayCatalogue(Basket basket);
 
 		//Input Handling
 		char WaitForCharInput();
+		int WaitForIntInput();
 		void SetActiveMenu(menuType menu);
 };
 

@@ -150,24 +150,24 @@ void Utilities::EnterCatalogueMenuAdmin()
 			std::cout << "Enter Product Price: ";
 			std::cin >> price;
 			id = productCatalogue.GetProducts().size() + 1;
-			productCatalogue.AddProduct(Product(id, productName, price));
+			productCatalogue.AddProduct(Product(productCatalogue.GenerateProductId(), productName, price));
 			EnterCatalogueMenuAdmin();
 			break;
 		case 'D':
 			std::cout << "Enter Product ID: ";
-			std::cin >> id;
+			id = WaitForIntInput();
 			productCatalogue.RemoveProduct(id);
 			EnterCatalogueMenuAdmin();
 			break;
 		case 'E':
 			std::cout << "Enter Product ID: ";
-			std::cin >> id;
+			id = WaitForIntInput();
 			std::cout << "Enter Product Name: ";
 			std::cin >> productName;
 			std::cout << "Enter Product Price: ";
 			std::cin >> price;
 			productCatalogue.RemoveProduct(id);
-			productCatalogue.AddProduct(Product(productCatalogue.GenerateProductId(), productName, price));
+			productCatalogue.AddProduct(Product(id, productName, price));
 			EnterCatalogueMenuAdmin();
 			break;
 		case 'B':
@@ -235,6 +235,21 @@ char Utilities::WaitForCharInput()
 	if (input >= 'a' && input <= 'z')
 		input -= 32;
 
+	return input;
+}
+
+int Utilities::WaitForIntInput()
+{
+	int input;
+	if (std::cin >> input)
+		return input;
+	else
+	{
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cout << "Invalid input, please try again" << std::endl;
+		WaitForIntInput();
+	}
 	return input;
 }
 
