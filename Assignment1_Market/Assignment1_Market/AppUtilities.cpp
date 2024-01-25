@@ -21,6 +21,11 @@ Utilities::Utilities(BasketManager basketManager)
 
 	checkoutMenuOptions[0] = { 'P', "Pay" };
 	checkoutMenuOptions[1] = { 'B', "Go Back to Shop" };
+
+	catalogueMenuAdminOptions[0] = { 'A', "Add Product" };
+	catalogueMenuAdminOptions[1] = { 'D', "Delete Product" };
+	catalogueMenuAdminOptions[2] = { 'E', "Edit Product" };
+	catalogueMenuAdminOptions[3] = { 'B', "Back to Admin Menu" };
 }
 
 #pragma region MenuStates
@@ -59,6 +64,7 @@ void Utilities::EnterAdminMenu()
 	switch (input)
 	{
 		case 'P':
+			EnterCatalogueMenuAdmin();
 			break;
 		case 'C':
 			break;
@@ -128,13 +134,41 @@ void Utilities::EnterCheckoutMenu()
 
 void Utilities::EnterCatalogueMenuAdmin()
 {
+	std::string productName = "";
+	int id = 0;
 	SetActiveMenu(catalogueMenuAdmin);
+	productCatalogue.DisplayProducts();
 	DisplayMenuOptions();
 
 	char input = WaitForCharInput();
 	switch (input)
 	{
 		case 'A':
+			float price;
+			std::cout << "Enter Product Name: ";
+			std::cin >> productName;
+			std::cout << "Enter Product Price: ";
+			std::cin >> price;
+			id = productCatalogue.GetProducts().size() + 1;
+			productCatalogue.AddProduct(Product(id, productName, price));
+			EnterCatalogueMenuAdmin();
+			break;
+		case 'D':
+			std::cout << "Enter Product ID: ";
+			std::cin >> id;
+			productCatalogue.RemoveProduct(id);
+			EnterCatalogueMenuAdmin();
+			break;
+		case 'E':
+			std::cout << "Enter Product ID: ";
+			std::cin >> id;
+			std::cout << "Enter Product Name: ";
+			std::cin >> productName;
+			std::cout << "Enter Product Price: ";
+			std::cin >> price;
+			productCatalogue.RemoveProduct(id);
+			productCatalogue.AddProduct(Product(productCatalogue.GenerateProductId(), productName, price));
+			EnterCatalogueMenuAdmin();
 			break;
 		case 'B':
 			EnterAdminMenu();
@@ -162,6 +196,11 @@ void Utilities::DisplayMenuOptions()
 			break;
 		case checkoutMenu:
 			DisplayMenuOptions(checkoutMenuOptions, 2);
+			break;
+		case catalogueMenuAdmin:
+			DisplayMenuOptions(catalogueMenuAdminOptions, 4);
+			break;
+		default:
 			break;
 	}
 }

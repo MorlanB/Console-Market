@@ -50,13 +50,13 @@ std::vector<ProductSelection> Basket::GenerateProductSelections(std::vector<Prod
 
 void Basket::DisplayProducts()
 {
-    std::cout << "Products in basket:\n\n";
-    std::cout << "ID" << "\t" << "Name" << "\t\t\t" << "Price" <<  "\t" << "Amount" << std::endl;
+    std::cout << " Products in basket:\n\n";
+    std::cout << " ID" << "\t" << "Name" << "\t\t\t" << "Price" <<  "\t" << "Amount" << std::endl;
     std::cout << "----------------------------------------------------------" << std::endl;
 
     for (int i = 0; i < 7; i++)
     {
-        std::cout << productSelections[i].product.id << "\t" << productSelections[i].product.name << "\t\t" << productSelections[i].product.price << "\t" << " x " << productSelections[i].quantity << "\t" << (productSelections[i].product.price * productSelections[i].quantity) << std::endl;
+        std::cout << " " << productSelections[i].product.id << "\t" << productSelections[i].product.name << "\t\t" << productSelections[i].product.price << "\t" << " x " << productSelections[i].quantity << "\t" << (productSelections[i].product.price * productSelections[i].quantity) << std::endl;
     }
 
     std::cout << "-----------------------------------------------------------" << std::endl;

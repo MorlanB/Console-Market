@@ -35,8 +35,11 @@ public:
 
     void AddProduct(Product product);
     bool RemoveProduct(int productId);
+    Product GetProduct(int productId);
+
+    void DisplayProducts();
     std::vector<Product> GetProducts();
-Product GetProduct(int productId);
+    int GenerateProductId();
 };
 
 #endif

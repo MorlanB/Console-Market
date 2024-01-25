@@ -31,6 +31,7 @@ class Utilities
 		MenuOption adminMenuOptions[3];
 		MenuOption productMenuOptions[3];
 		MenuOption checkoutMenuOptions[2];
+		MenuOption catalogueMenuAdminOptions[4];
 
 		std::string startAsciiString =
 			"|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n"
