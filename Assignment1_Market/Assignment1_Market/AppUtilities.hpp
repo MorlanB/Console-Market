@@ -28,6 +28,7 @@ class Utilities
 		ProductCatalogue productCatalogue;
 		CustomerCatalogue customerCatalogue;
 		BasketManager basketManager;
+		bool isCardScanned = false;
 
 		MenuOption startMenuOptions[3];
 		MenuOption adminMenuOptions[3];
@@ -78,7 +79,10 @@ class Utilities
 		char WaitForCharInput();
 		std::string WaitForStringInput();
 
+		//Actions
 		void TryMakePayment();
+		void ScanRewardCard();
+		void PressAnyKeyToContinue();
 };
 
 #endif

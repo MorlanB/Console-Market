@@ -10,7 +10,7 @@ Utilities::Utilities(BasketManager basketManager)
 
 	startMenuOptions[0] = { 'A', "Admin Menu" };
 	startMenuOptions[1] = { 'S', "Shop" };
-	startMenuOptions[2] = { 'R', "Enter Reward Card" };
+	startMenuOptions[2] = { 'R', "Scan Reward Card" };
 
 	adminMenuOptions[0] = { 'P', "Manage Product Catalogue" };
 	adminMenuOptions[1] = { 'C', "Manage Registered Customers" };
@@ -32,6 +32,8 @@ Utilities::Utilities(BasketManager basketManager)
 	customerCatalogueMenuAdminOptions[1] = { 'D', "Delete Customer" };
 	customerCatalogueMenuAdminOptions[2] = { 'E', "Edit Customer" };
 	customerCatalogueMenuAdminOptions[3] = { 'B', "Back to Admin Menu" };
+
+	bool isCardScanned = false;
 }
 
 #pragma region MenuStates
@@ -52,7 +54,9 @@ void Utilities::EnterStartMenu()
 			EnterShopMenu();
 			break;
 		case 'R':
-
+			ScanRewardCard();
+			PressAnyKeyToContinue();
+			EnterStartMenu();
 			break;
 		default:
 			EnterStartMenu();
@@ -123,10 +127,24 @@ void Utilities::EnterShopMenu()
 void Utilities::EnterCheckoutMenu()
 {
 	float cash = 0;
-
+	float total = basketManager.GetBasket(0).GetTotal();
+	float discount = 0;
 	SetActiveMenu(checkoutMenu);
 	std::cout << "Checkout" << std::endl << std::endl;
-	std::cout << "Total: " << basketManager.GetBasket(0).GetTotal() << std::endl << std::endl;
+	if (isCardScanned)
+	{
+		std::cout << "Subtotal: " << total << std::endl;
+
+		discount = total * 0.1;
+		total -= discount;
+
+		std::cout << "Discount: " << discount << std::endl;
+		std::cout << "Total: " << total << std::endl << std::endl;
+	}
+	else
+	{
+		std::cout << "Total: " << basketManager.GetBasket(0).GetTotal() << std::endl << std::endl;
+	}
 
 	DisplayMenuOptions();
 
@@ -163,7 +181,7 @@ void Utilities::TryMakePayment()
 		std::cout << "Thank you for shopping at ... MARKET" << std::endl;
 		std::cout << "Please come again" << std::endl;
 		std::cout << "Press any key to continue" << std::endl;
-		std::cin >> input;
+		PressAnyKeyToContinue();
 		EnterStartMenu();
 	}
 }
@@ -382,3 +400,16 @@ void Utilities::SetActiveMenu(menuType menu)
 }
 
 #pragma endregion
+
+void Utilities::ScanRewardCard()
+{
+	isCardScanned = true;
+	std::cout << std::endl << "Card Scanned" << std::endl << std::endl;
+}
+
+void Utilities::PressAnyKeyToContinue()
+{
+	std::cout << "Press any key to continue" << std::endl;
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	std::cin.get();
+}
