@@ -1,6 +1,7 @@
 #include <string>
 #include "ProductCatalogue.hpp"
 #include "BasketManager.hpp"
+
 #ifndef UTILITIES_HPP
 #define UTILITIES_HPP
 

@@ -1,5 +1,5 @@
 #include "ProductCatalogue.hpp"
-#include "Customer.hpp"
+#include "CustomerCatalogue.hpp"
 #include "BasketManager.hpp"
 
 #include <iostream>

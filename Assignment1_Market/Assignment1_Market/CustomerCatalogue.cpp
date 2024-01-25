@@ -1,7 +1,4 @@
-#include "customer.hpp"
-
-#include <iostream>
-#include <string>
+#include "CustomerCatalogue.hpp"
 
 Customer::Customer(int id, std::string name, int phoneNumber, std::string email)
 {

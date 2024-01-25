@@ -1,6 +1,6 @@
 #include <iostream>
 #include "BasketManager.hpp"
-#include "Customer.hpp"
+#include "CustomerCatalogue.hpp"
 #include "AppUtilities.hpp"
 
 int main()

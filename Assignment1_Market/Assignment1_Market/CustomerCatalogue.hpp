@@ -1,7 +1,8 @@
-#ifndef CUSTOMER_HPP
-#define CUSTOMER_HPP
+#ifndef CUSTOMERS_HPP
+#define CUSTOMERS_HPP
 
-#include <string>
+#include <iostream>
+#include <vector>
 
 class Customer
 {
@@ -14,5 +15,12 @@ private:
 public:
 	Customer(int id, std::string name, int phoneNumber, std::string email);
 	Customer();
+};
+
+class CustomerCatalogue
+{
+	private:
+	std::vector<Customer> customers;
+
 };
 #endif

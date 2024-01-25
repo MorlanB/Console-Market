@@ -129,14 +129,14 @@
   <ItemGroup>
     <ClCompile Include="AppUtilities.cpp" />
     <ClCompile Include="BasketManager.cpp" />
-    <ClCompile Include="Customer.cpp" />
+    <ClCompile Include="CustomerCatalogue.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ProductCatalogue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppUtilities.hpp" />
     <ClInclude Include="BasketManager.hpp" />
-    <ClInclude Include="Customer.hpp" />
+    <ClInclude Include="CustomerCatalogue.hpp" />
     <ClInclude Include="ProductCatalogue.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

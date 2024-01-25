@@ -3,7 +3,7 @@
 
 #include <chrono>
 #include <vector>
-#include "Customer.hpp"
+#include "CustomerCatalogue.hpp"
 #include "ProductCatalogue.hpp"
 
 struct ProductSelection
