@@ -26,13 +26,15 @@ class Utilities
 	private:
 		menuType activeMenu;
 		ProductCatalogue productCatalogue;
+		CustomerCatalogue customerCatalogue;
 		BasketManager basketManager;
 
 		MenuOption startMenuOptions[3];
 		MenuOption adminMenuOptions[3];
 		MenuOption productMenuOptions[3];
 		MenuOption checkoutMenuOptions[2];
-		MenuOption catalogueMenuAdminOptions[4];
+		MenuOption procuctCatalogueMenuAdminOptions[4];
+		MenuOption customerCatalogueMenuAdminOptions[4];
 
 		std::string startAsciiString =
 			"|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n"
@@ -63,6 +65,8 @@ class Utilities
 		//Menus
 		void EnterStartMenu();
 		void SetActiveMenu(menuType menu);
+
+		void EnterCustomerMenuAdmin();
 
 		//Display
 		void DisplayMenuOptions();

@@ -23,10 +23,15 @@ Utilities::Utilities(BasketManager basketManager)
 	checkoutMenuOptions[0] = { 'P', "Pay" };
 	checkoutMenuOptions[1] = { 'B', "Go Back to Shop" };
 
-	catalogueMenuAdminOptions[0] = { 'A', "Add Product" };
-	catalogueMenuAdminOptions[1] = { 'D', "Delete Product" };
-	catalogueMenuAdminOptions[2] = { 'E', "Edit Product" };
-	catalogueMenuAdminOptions[3] = { 'B', "Back to Admin Menu" };
+	procuctCatalogueMenuAdminOptions[0] = { 'A', "Add Product" };
+	procuctCatalogueMenuAdminOptions[1] = { 'D', "Delete Product" };
+	procuctCatalogueMenuAdminOptions[2] = { 'E', "Edit Product" };
+	procuctCatalogueMenuAdminOptions[3] = { 'B', "Back to Admin Menu" };
+
+	customerCatalogueMenuAdminOptions[0] = { 'A', "Add Customer" };
+	customerCatalogueMenuAdminOptions[1] = { 'D', "Delete Customer" };
+	customerCatalogueMenuAdminOptions[2] = { 'E', "Edit Customer" };
+	customerCatalogueMenuAdminOptions[3] = { 'B', "Back to Admin Menu" };
 }
 
 #pragma region MenuStates
@@ -68,6 +73,7 @@ void Utilities::EnterAdminMenu()
 			EnterCatalogueMenuAdmin();
 			break;
 		case 'C':
+			EnterCustomerMenuAdmin();
 			break;
 		case 'B':
 			EnterStartMenu();
@@ -138,6 +144,7 @@ void Utilities::EnterCatalogueMenuAdmin()
 	std::string productName;
 	int id = 0;
 	float price = 0;
+
 	SetActiveMenu(catalogueMenuAdmin);
 	productCatalogue.DisplayProducts();
 	DisplayMenuOptions();
@@ -180,6 +187,58 @@ void Utilities::EnterCatalogueMenuAdmin()
 	}
 }
 
+void Utilities::EnterCustomerMenuAdmin()
+{
+	std::string customerName;
+	int phoneNumber = 0;
+	std::string email;
+	int id = 0;
+
+	SetActiveMenu(customerMenuAdmin);
+	customerCatalogue.DisplayCustomers();
+	DisplayMenuOptions();
+
+	char input = WaitForCharInput();
+	switch (input)
+	{
+		case 'A':
+			std::cout << "Enter Customer Name: ";
+			customerName = WaitForStringInput();
+			std::cout << "Enter Customer Phone Number: ";
+			phoneNumber = WaitForIntInput();
+			std::cout << "Enter Customer Email: ";
+			email = WaitForStringInput();
+			customerCatalogue.AddCustomer(Customer(customerCatalogue.GenerateCustomerId(), customerName, phoneNumber, email));
+			EnterCustomerMenuAdmin();
+			break;
+		case 'D':
+			std::cout << "Enter Customer ID: ";
+			id = WaitForIntInput();
+			customerCatalogue.RemoveCustomer(id);
+			EnterCustomerMenuAdmin();
+			break;
+		case 'E':
+			std::cout << "Enter Customer ID: ";
+			id = WaitForIntInput();
+			std::cout << "Enter Customer Name: ";
+			customerName = WaitForStringInput();
+			std::cout << "Enter Customer Phone Number: ";
+			phoneNumber = WaitForIntInput();
+			std::cout << "Enter Customer Email: ";
+			email = WaitForStringInput();
+			customerCatalogue.RemoveCustomer(id);
+			customerCatalogue.AddCustomer(Customer(id, customerName, phoneNumber, email));
+			EnterCustomerMenuAdmin();
+			break;
+		case 'B':
+			EnterAdminMenu();
+			break;
+		default:
+			EnterCustomerMenuAdmin();
+			break;
+	}
+}
+
 #pragma endregion
 
 void Utilities::DisplayMenuOptions()
@@ -199,7 +258,10 @@ void Utilities::DisplayMenuOptions()
 			DisplayMenuOptions(checkoutMenuOptions, 2);
 			break;
 		case catalogueMenuAdmin:
-			DisplayMenuOptions(catalogueMenuAdminOptions, 4);
+			DisplayMenuOptions(procuctCatalogueMenuAdminOptions, 4);
+			break;
+		case customerMenuAdmin:
+			DisplayMenuOptions(customerCatalogueMenuAdminOptions, 4);
 			break;
 		default:
 			break;
